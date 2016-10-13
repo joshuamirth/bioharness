@@ -55,6 +55,8 @@ function Posture_GUI_OpeningFcn(hObject, eventdata, handles, varargin)
 % Choose default command line output for Posture_GUI
 handles.output = hObject;
 
+handles.angle_test = 0;
+
 % Update handles structure
 guidata(hObject, handles);
 
@@ -90,6 +92,7 @@ else
     set(hObject,'BackgroundColor','green');
 end
 handles.angle_adj = angle_adj;
+handles.angle_test = 1;
 % Update handles structure
 guidata(hObject, handles);
 
@@ -145,7 +148,11 @@ function binButton_Callback(hObject, eventdata, handles)
 % title('Bins of Accleration Data');
 % ylabel('Percentage');
 
-posture_mag = abs(handles.posture);
+if handles.angle_test
+    posture_mag = abs(handles.posture + handles.angle_adj);
+else
+    posture_mag = abs(handles.posture);
+end
 total = length(posture_mag);
 
 % Compute bins.
@@ -161,14 +168,12 @@ severe_perc = severe_bin/total;
 bin_perc = [neutral_perc, mild_perc, severe_perc];
 
 % Make a bin plot.
-bar3(bin_perc,'green');
-%xlabel('Neutral, Mild, Severe');
+bar3(bin_perc,'red');
 title('Bins of Posture Data (Percentages)');
-%ylabel('Percentage');
-legend('Neutral','Mild','Severe');
 
 % TODO: Add info to the table so we have actual numbers.
-
+bin_data = {'Neutral',neutral_perc,neutral_bin; 'Mild',mild_perc,mild_bin; 'Severe',severe_perc,severe_bin};
+set(handles.infoTable,'Data',bin_data);
 
 
 % --- Executes on button press in frequencyButton.
@@ -206,8 +211,12 @@ function plotButton_Callback(hObject, eventdata, handles)
 % hObject    handle to plotButton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
-plot(handles.posture);
+if handles.angle_test
+    plot(handles.posture + handles.angle_adj);
+else
+    plot(handles.posture);
+end
+grid on;
 
 
 
