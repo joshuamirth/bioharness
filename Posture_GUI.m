@@ -22,7 +22,7 @@ function varargout = Posture_GUI(varargin)
 
 % Edit the above text to modify the response to help Posture_GUI
 
-% Last Modified by GUIDE v2.5 10-Oct-2016 20:13:03
+% Last Modified by GUIDE v2.5 18-Oct-2016 16:00:24
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -76,38 +76,6 @@ varargout{1} = handles.output;
 
 
 
-function postureAdjField_Callback(hObject, eventdata, handles)
-% hObject    handle to postureAdjField (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of postureAdjField as text
-%        str2double(get(hObject,'String')) returns contents of postureAdjField as a double
-
-angle_adj = str2double(get(hObject, 'String'));
-if isnan(angle_adj)
-    disp('Please enter a number');
-    set(hObject,'BackgroundColor','red');
-else
-    set(hObject,'BackgroundColor','green');
-end
-handles.angle_adj = angle_adj;
-handles.angle_test = 1;
-% Update handles structure
-guidata(hObject, handles);
-
-
-% --- Executes during object creation, after setting all properties.
-function postureAdjField_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to postureAdjField (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
 
 
 % --- Executes on button press in timeAboveButton.
@@ -176,111 +144,9 @@ bin_data = {'Neutral',neutral_perc,neutral_bin; 'Mild',mild_perc,mild_bin; 'Seve
 set(handles.infoTable,'Data',bin_data);
 
 
-% --- Executes on button press in frequencyButton.
-function frequencyButton_Callback(hObject, eventdata, handles)
-% hObject    handle to frequencyButton (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-
-
-function timeAboveField_Callback(hObject, eventdata, handles)
-% hObject    handle to timeAboveField (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of timeAboveField as text
-%        str2double(get(hObject,'String')) returns contents of timeAboveField as a double
-
-
-% --- Executes during object creation, after setting all properties.
-function timeAboveField_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to timeAboveField (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
-
-% --- Executes on button press in plotButton.
-function plotButton_Callback(hObject, eventdata, handles)
-% hObject    handle to plotButton (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-if handles.angle_test
-    plot(handles.posture + handles.angle_adj);
-else
-    plot(handles.posture);
-end
-grid on;
-
-
-
-function lowerBdField_Callback(hObject, eventdata, handles)
-% hObject    handle to lowerBdField (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of lowerBdField as text
-%        str2double(get(hObject,'String')) returns contents of lowerBdField as a double
-
-lw_bd = str2double(get(hObject,'String'));
-if isnan(lw_bd)
-    disp('Please enter a number');
-    set(hObject,'BackgroundColor','red');
-elseif lw_bd >= handles.up_bd
-    disp('Lower bound must be < upper bound.');
-    set(hObject,'BackgroundColor','yellow');
-else
-    set(hObject,'BackgroundColor','green');
-end
-handles.lw_bd = lw_bd;
-% Update handles structure
-guidata(hObject, handles);
-
-% --- Executes during object creation, after setting all properties.
-function lowerBdField_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to lowerBdField (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
-
-
-function frequencyField_Callback(hObject, eventdata, handles)
-% hObject    handle to frequencyField (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of frequencyField as text
-%        str2double(get(hObject,'String')) returns contents of frequencyField as a double
-
-
-% --- Executes during object creation, after setting all properties.
-function frequencyField_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to frequencyField (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
-
-% --- Executes on button press in postureSelectButton.
-function postureSelectButton_Callback(hObject, eventdata, handles)
-% hObject    handle to postureSelectButton (see GCBO)
+% --- Executes on button press in insideSelectButton.
+function insideSelectButton_Callback(hObject, eventdata, handles)
+% hObject    handle to insideSelectButton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
@@ -300,6 +166,10 @@ if strcmp(str,'MACI64')
     %handles.phi = csvread(filename,1,4,[1,4,300,4]);
     %handles.theta = csvread(filename,1,5,[1,5,300,5]);
 else
+    % Reading Excel files works correctly on Windows systems. It is
+    % somewhat painfully slow. TODO: consider ways to ditch this processing
+    % step, or script it into something that can be run overnight, separate
+    % from the GUI.
     [input_filename,filepath] = uigetfile('*.xlsx','Select a File to Open');
     filename = (strcat(filepath,input_filename));
     disp('Reading file:');
@@ -307,8 +177,9 @@ else
     handles.acc_v = xlsread(filename,3,'B:B');
     handles.acc_l = xlsread(filename,3,'C:C');
     handles.acc_s = xlsread(filename,3,'D:D');
-    handles.phi = xlsread(filename,3,'F:F');
-    handles.theta = xlsread(filename,3,'G:G');
+    % These angles do not appear to be needed.
+%    handles.phi = xlsread(filename,3,'F:F');
+%    handles.theta = xlsread(filename,3,'G:G');
 end
 disp('File read successfully');
 
@@ -319,9 +190,9 @@ guidata(hObject,handles);
 
 
 
-% --- Executes on button press in xyzSelectbutton.
-function xyzSelectbutton_Callback(hObject, eventdata, handles)
-% hObject    handle to xyzSelectbutton (see GCBO)
+% --- Executes on button press in outsideSelectbutton.
+function outsideSelectbutton_Callback(hObject, eventdata, handles)
+% hObject    handle to outsideSelectbutton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
@@ -329,38 +200,9 @@ function xyzSelectbutton_Callback(hObject, eventdata, handles)
 
 
 
-function upperBdField_Callback(hObject, eventdata, handles)
-% hObject    handle to upperBdField (see GCBO)
+
+% --- Executes on button press in pushbutton7.
+function pushbutton7_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton7 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of upperBdField as text
-%        str2double(get(hObject,'String')) returns contents of upperBdField as a double
-
-up_bd = str2double(get(hObject,'String'));
-if isnan(up_bd)
-    disp('Please enter a number');
-    set(hObject,'BackgroundColor','red');
-elseif exist('handles.lw_bd') && up_bd <= handles.lw_bd
-    disp('Upper bound must be > lower bound.');
-    set(hObject,'BackgroundColor','orange');
-else
-    set(hObject,'BackgroundColor','green');
-end
-handles.up_bd = up_bd;
-% Update handles structure
-guidata(hObject, handles);
-
-
-
-% --- Executes during object creation, after setting all properties.
-function upperBdField_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to upperBdField (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
