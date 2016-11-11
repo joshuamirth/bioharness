@@ -4,7 +4,6 @@ function ProcessExcel()
 %   only run on Windows computers. And it assumes all Excel files have exactly eight
 %   sheets.
 %   TODO: Make sure not to reprocess files. Ask for correction factor.
-c
 % Get the data folder:
 data_dir = uigetdir;
 dirListing = dir(data_dir);
