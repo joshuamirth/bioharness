@@ -6,10 +6,10 @@ function [clusters] = AccelerationCEVA( data )
 % http://bmcmedresmethodol.biomedcentral.com/articles/10.1186/1471-2288-13-54
 
 % Set the cutoffs for neutral, moderate, and severe exposure.
-neutral_cutoff = 0.3;
-moderate_cutoff = 0.6;
+neutral_cutoff = 20;
+moderate_cutoff = 45;
 
-% Set the cutoffs for short, medium, and long time duration.
+% TODO: Set the cutoffs for short, medium, and long time duration.
 short = 3;
 medium = 6;
 
