@@ -18,7 +18,7 @@ a = zeros(1,len);
 theta = zeros(1,len);
 a = sqrt(x.^2 + y.^2);
 theta = atan(a./z);      % Note: atan between -pi/2 and pi/2
-theta = 360*theta./(2*pi);
-theta = 90*ones(len,1) - theta; % Want angle down from vertical.
+theta = 360*theta./(2*pi);  % Convert to degrees.
+%theta = -90*ones(len,1) - theta; % Want angle down from vertical.
 
 end

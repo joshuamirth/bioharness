@@ -75,7 +75,7 @@ for i = 1:n
       count = 1;
    end
    % Update previous bin
-   previous_bin = bin
+   previous_bin = bin;
 end
 
 % Finish off the last bin:
@@ -105,6 +105,6 @@ elseif previous_bin == 3
     end
 end
 
-clusters = [neutral_short, neutral_medium, neutral_long, moderate_short, moderate_medium, moderate_long, severe_short, severe_medium, severe_long];
+clusters = [neutral_short, neutral_medium, neutral_long; moderate_short, moderate_medium, moderate_long; severe_short, severe_medium, severe_long];
 
 end
